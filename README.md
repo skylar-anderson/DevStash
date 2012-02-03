@@ -8,13 +8,13 @@ Simply refer to the contents of the script after loading jQuery but before makin
 
 After you have referred to the attached script you can take a snapshot using your browsers Javascript console:
 
-  DevStash.snapshot(true);
+    DevStash.snapshot(true);
 
 The current page should then refresh.  All subsequent XHR requests will be recorded.
 
 To begin using what is stored in cache, simply enter the following in your JS console:
 
-  DevStash.load(true);
+    DevStash.load(true);
   
   
   
