@@ -2,9 +2,6 @@ var DevStash = {
 
   getCacheItem: function(key) {
 
-    console.log(key);
-    console.log(localStorage.getItem(key));
-
     if(localStorage && localStorage.getItem && localStorage.getItem(key) && localStorage.loadFromCache) {
 
       this.log("--[ Loading From Cache ]-- " + key);
