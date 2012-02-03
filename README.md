@@ -1,6 +1,3 @@
-DevStash
-=============
-
 DevStash is a useful tool for expediting local development.
 ----------
 
@@ -8,7 +5,7 @@ Simply refer to the contents of the script after loading jQuery but before makin
 
 After you have referred to the attached script you can take a snapshot using your browsers Javascript console:
 
-    DevStash.snapshot(true);
+    DevStash.capture(true);
 
 The current page should then refresh.  All subsequent XHR requests will be recorded.
 
