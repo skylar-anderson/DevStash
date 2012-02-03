@@ -1,4 +1,4 @@
-var DevCache = {
+var DevStash = {
 
   getCacheItem: function(key) {
 
@@ -73,7 +73,7 @@ var aj = $.ajax;
 
 $.ajax = function(options) {
 
-  var key = DevCache.cleanKey(options.url);
+  var key = DevStash.cleanKey(options.url);
   var oSuccess = options.success;
   var oBeforeSend = options.beforeSend;
 
@@ -81,9 +81,9 @@ $.ajax = function(options) {
 
     beforeSend: function() {
       
-      if(DevCache.loadFromCache() && DevCache.getCacheItem(key)) {
+      if(DevStash.loadFromCache() && DevStash.getCacheItem(key)) {
 
-        var successData = DevCache.getCacheItem(key);
+        var successData = DevStash.getCacheItem(key);
 
         oSuccess(successData.data, successData.textStatus, successData.jqXHR);          
         return false;
@@ -97,9 +97,9 @@ $.ajax = function(options) {
     },
     success: function(data, textStatus, jqXHR) {
       
-      if(DevCache.writeToCache()) {
+      if(DevStash.writeToCache()) {
 
-        DevCache.setCacheItem(key, {
+        DevStash.setCacheItem(key, {
           data: data,
           textStatus:textStatus,
           jqXHR: jqXHR
@@ -120,4 +120,4 @@ $.ajax = function(options) {
     
 }
 
-window.DevCache = DevCache;
+window.DevStash = DevStash;
