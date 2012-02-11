@@ -25,7 +25,7 @@ Using your XHR cache
 
 Once you have recorded enough XHR's to be useful for your development and you are ready to begin using your cache, simply enter the following in your JS console:
 
-    $.DevStash.("load");  // Use local cache if the requested URL has been cached.
+    $.DevStash("load");  // Use local cache if the requested URL has been cached.
 
    
 Debugging DevStash.js
@@ -33,7 +33,7 @@ Debugging DevStash.js
 
 Both captujre and load receive an optional parameter 'debug' which dictates whether to output to the browser console or not.
 
-	$.DevStash.("capture", true);
-	$.DevStash.("load", true);
+	$.DevStash("capture", true);
+	$.DevStash("load", true);
 
 If your code attempts to request an XHR that hasn't yet been recorded, a traditional XHR request will be performed.
