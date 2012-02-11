@@ -1,14 +1,13 @@
 DevStash is a useful tool for expediting local user interface development.
 ----------
 
-DevStash is a jQuery plugin that extends jQuery.ajax(), allowing you to store a cache of AJAX requests that can later be used for "instant" loading of your local app.  DevStash is prefect for UI developers building large-scale AJAX driven Javascrupt UI's.  With DevStash enabled, pages will begin refreshing immediately and you can even work 'offline'.
+DevStash is a jQuery plugin that extends jQuery.ajax(), allowing you to store a cache of AJAX requests that can later be used for "instant" loading of your local app.  DevStash is prefect for UI developers building large-scale AJAX driven Javascrupt UI's.  With DevStash enabled, pages will begin refreshing immediately and you can even work 'offline'.  DevStash even works with higher level frameworks like Backbone.js or Knockout.js.
 
 
 Installing DevStash
 ----------
 
-DevStash attaches itself to jQuery AJAX, so to install, all you need to do is ensure you load DevStash.js **after** jQuery but **before** you make any AJAX requests.
-DevStash requires jQuery to operate.  Simply refer to the contents of the script after loading jQuery but before making any AJAX calls and you will begin being able to record the responses of all XHR's on the current domain..
+DevStash attaches itself to jQuery AJAX, so to install, all you need to do is ensure you load DevStash.js **after** jQuery but **before** you make any AJAX requests. Simply refer to the contents of the script after loading jQuery but before making any AJAX calls and you will begin being able to record the responses of all XHR's on the current domain..
 
 
 Begin Recording your XHR cache
