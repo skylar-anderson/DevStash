@@ -1,5 +1,11 @@
 $(document).ready(function($){
   
+  if(!localStorage) {
+    alert("DevStash.js requires an HTML5 localStorage enabled browser");
+  }
+
+  if (!localStorage.writeToCache && !localStorage.loadFromCache) { return; }
+
   var defers = [];
   var start = new Date().getTime();
   var end;

@@ -40,6 +40,9 @@
 
 
       <p>If you have any suggestions or bug fixes, please post them on our <a href="https://github.com/sandersonet/DevStash/issues">github issue tracker</a> or email <a href="mailto:anderson@skylar.me">anderson@skylar.me</a>
+
+      <h4>You must Load From Web before seeing the affects of loading from cache</strong></h4>
+
       <div class="links">
         <a href="#" class="capture button">Load From Web</a>
         <a href="#" class="load button">Load From Cache</a>
@@ -60,7 +63,7 @@
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="libs/jquery-1.7.1.min.js"><\/script>')</script>
   <script src="../jquery.devstash.js"></script>
-  <script src="example.js"></script>
+  <script src="demo.js"></script>
   <script>
     $(document).ready(function($) {
       
@@ -80,8 +83,7 @@
       });
 
       if(localStorage && localStorage.writeToCache) { captureLink.addClass("current"); }
-      else if(localStorage && localStorage.loadFromCache) { console.log(loadLink);loadLink.addClass("current"); }      
-      else { captureLink.addClass("current"); }
+      else if(localStorage && localStorage.loadFromCache) { loadLink.addClass("current"); }
 
 
     });
