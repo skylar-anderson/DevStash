@@ -1,0 +1,92 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>DevStash.js Example</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <link rel="stylesheet" href="css/style.css">
+
+
+</head>
+
+<body>
+
+  <div id="container">
+    <header>
+      <h1 class="title" title="DevStash.js">DevStash.js</h1>
+    </header>
+    <div id="main" role="main">
+
+      <p>
+        The following example demonstrates DevStash's ability to speed up local development by significantly reducing the amount of time it takes to make chained (or parallel) AJAX calls.  Once you set DevStash to begin capturing,  all subsequent AJAX requests will automatically be recorded to localStorage.  Now, once you toggle back to load from cache, DevStash will always look in localStorage before using AJAX to fulfil the request.
+      </p>
+
+      <p>
+        DevStash requires no new code to begin using.  DevStash works by attaching itself to jQuery.ajax method automatically.  Just make sure you reference DevStash after jQuery but before you begin making any AJAX requests and that you use jQuery.ajax().  DevStash currently only supports jQuery.  
+      </p>
+
+      <p>
+        Once you set the state of DevStash, to either load from web or load from cache, DevStash will continue to use this setting for the current domain indefinitely (even after page refreshes).  DevStash can only load URL's from cache that is has previously recorded.  If the URL is new to DevStash, it will load it from the web.  A good way to use DevStash is to enable capture mode and interact with your site, firing off all the AJAX calls you think you'll need.  Once you have captured your calls, toggle back to cache mode to use your cache.
+      </p>
+
+
+
+      <p>If you have any suggestions or bug fixes, please post them on our <a href="https://github.com/sandersonet/DevStash/issues">github issue tracker</a> or email <a href="mailto:anderson@skylar.me">anderson@skylar.me</a>
+      <div class="links">
+        <a href="#" class="capture button">Load From Web</a>
+        <a href="#" class="load button">Load From Cache</a>
+        <a href="#" class="refresh">Refresh</a>
+      </div>
+
+      <div id="output">
+
+      </div>
+
+    </div>
+    <footer>
+
+    </footer>
+  </div> <!--! end of #container -->
+
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libs/jquery-1.7.1.min.js"><\/script>')</script>
+  <script src="../jquery.devstash.js"></script>
+  <script src="example.js"></script>
+  <script>
+    $(document).ready(function($) {
+      
+      var captureLink = $('.capture').click(function() {      	
+        $.DevStash("capture", true);
+        return false;
+      });
+
+      var loadLink = $('.load').click(function() {
+        $.DevStash("load", true);
+        return false;
+      });
+
+      var refreshLink = $('.refresh').click(function() {
+      	location.reload();        
+        return false;
+      });
+
+      if(localStorage && localStorage.writeToCache) { captureLink.addClass("current"); }
+      else if(localStorage && localStorage.loadFromCache) { console.log(loadLink);loadLink.addClass("current"); }      
+      else { captureLink.addClass("current"); }
+
+
+    });
+  </script>
+
+  
+</body>
+</html>

@@ -31,7 +31,7 @@ Once you have recorded enough XHR's to be useful for your development and you ar
 Debugging DevStash.js
 ----------
 
-Both captujre and load receive an optional parameter 'debug' which dictates whether to output to the browser console or not.
+Both capture and load receive an optional parameter 'debug' which dictates whether to output to the browser console or not when loading/capturing cache.
 
 	$.DevStash("capture", true);
 	$.DevStash("load", true);
