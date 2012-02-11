@@ -1,3 +1,11 @@
+/*!
+ * DevStash v1.0.0
+ * http://devstash.it
+ * https://github.com/sandersonet/DevStash
+ *
+ * Author: Skylar Anderson
+ * anderson@skylar.me
+ */
 (function() {
 
   "use strict";
@@ -59,7 +67,7 @@
       return localStorage && localStorage.writeToCache;
     },
     cleanKey: function(k) {
-      return k.replace(/.*\/rest/, '/rest');
+      return k;
     },
     log: function(stuff) {
       if(console && console.log && localStorage && localStorage.debugCache) {
@@ -70,25 +78,51 @@
 
   };
 
-  var aj = $.ajax; 
+  var aj = jQuery.ajax; 
 
-  $.ajax = function(options) {
+  jQuery.ajax = function(options) {
 
-    var key = DevStash.cleanKey(options.url);
-    var oSuccess = options.success;
-    var oBeforeSend = options.beforeSend;
+    var key,
+    oSuccess,
+    oBeforeSend,
+    parameters;
+
+    if(typeof options === "string") {
+
+      key = options;
+      parameters = { url: key };
+
+    } else if(typeof options === "object") {      
+
+      parameters = options;
+      key = options.url;
+      oSuccess = options.success;
+      oBeforeSend = options.beforeSend;
+
+    }
 
     var newOptions = {
 
       beforeSend: function() {
 
-        if(DevStash.loadFromCache() && DevStash.getCacheItem(key)) {
+        var successData = DevStash.getCacheItem(key);
 
-          var successData = DevStash.getCacheItem(key);
-          setTimeout(function() {
-            oSuccess(successData.data, successData.textStatus, successData.jqXHR);          
-          }, 0);
+        if(DevStash.loadFromCache() && successData) {
 
+          if(typeof oSuccess === 'function') {
+
+            setTimeout(function() {
+              oSuccess(successData.data, successData.textStatus, successData.jqXHR);          
+            }, 5);  
+
+          } else if(typeof $.ajaxSettings.success === "function") {
+
+            setTimeout(function() {
+              $.ajaxSettings.success(successData.data, successData.textStatus, successData.jqXHR);          
+            }, 5);  
+
+          }
+                    
           return false;
 
         } else {
@@ -112,17 +146,28 @@
 
         if(typeof oSuccess === 'function') {
 
-          oSuccess.apply(this, arguments);          
+          return oSuccess.apply(this, arguments);          
 
         }
 
       }
     };
 
-    aj($.extend({}, options, newOptions));
+    return aj(jQuery.extend({}, parameters, newOptions));
 
   };
 
-  window.DevStash = DevStash;
+  $.extend({
+    DevStash: function(func, arg) {
+      switch(func) {
+        case "load":
+          DevStash.load(arg);
+          break;
+        case "capture":
+          DevStash.capture(arg);
+          break;
+      }
+    }
+  })
   
 }());
